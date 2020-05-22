@@ -6,7 +6,7 @@ plugins {
 }
 
 dependencies {
-    implementation(Dependencies.kotlinStdLib)
+    implementation(Libraries.kotlinStdLib)
 }
 
 tasks {
