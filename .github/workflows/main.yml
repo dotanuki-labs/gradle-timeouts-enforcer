@@ -1,4 +1,4 @@
-name: Main workflow
+name: Main
 
 on: [push]
 
@@ -15,7 +15,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('buildSrc/src/main/kotlin/Dependencies.kt') }}
+          key: ${{ runner.os }}-gradle-${{ hashFiles('buildSrc/src/main/kotlin/Versions.kt') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
@@ -27,5 +27,5 @@ jobs:
       - name: Code Analysis
         run: ./gradlew ktlintCheck --no-daemon
 
-      - name: Assemble and Test
-        run: ./gradlew build --no-daemon
+      - name: Run tests
+        run: ./gradlew test --no-daemon

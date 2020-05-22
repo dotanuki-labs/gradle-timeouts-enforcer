@@ -1,4 +1,4 @@
-rootProject.name = "jvm-library-boilerplate"
+rootProject.name = "gradle-timeouts-enforcer"
 
 include(":library")
 include(":sample")

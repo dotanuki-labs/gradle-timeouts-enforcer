@@ -1,24 +1,10 @@
-# JVM Library Boilerplate
+# Gradle Timeouts Enforcer Plugin
+
+> Ensure that your Gradle build never runs forever for whatever reason
 
 ## What is this?
 
-An opinionated boilterplate to speed up the creation of a new JVM library.
-
-It uses
-
-- A multi-module Gradle project with a convienent structure, with definitions under `buildSrc`
-- Gradle modules driven by Kotlin Gradle DSL
-- Code style with Ktlint
-- Continuous Integration with a simple workflow on Github Actions
-
-My main use cases for this boilterplate
-
-- New JVM libraries
-- New Gradle plugins
-
-## How do I use it?
-
-You can just clone this repo and rename your stuff. Particullarly, I have this automated with a proper Shell script.
+TODO
 
 ## Author
 
