@@ -8,7 +8,7 @@ internal sealed class TimeoutEnforcerException(error: String) : GradleException(
     data class BuildTimeoutReached(
         val timeout: Duration
     ) : TimeoutEnforcerException(
-        timeout.formatMessage("Your build timed out")
+        timeout.formatMessage("Your build timed out after")
     )
 
     data class InvalidGradleVersion(

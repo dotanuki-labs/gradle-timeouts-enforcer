@@ -23,7 +23,6 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
         }
 
         with(target.gradle) {
-
             ensureValidVersion(gradleVersion)
 
             taskGraph.whenReady { graph ->
@@ -51,8 +50,8 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
     }
 
     companion object {
-        val DEFAULT_BUILD_TIMEOUT: Duration = Duration.of(4L, ChronoUnit.MINUTES)
-        val DEFAULT_TASK_TIMEOUT: Duration = Duration.of(30L, ChronoUnit.MINUTES)
+        val DEFAULT_BUILD_TIMEOUT: Duration = Duration.of(8L, ChronoUnit.SECONDS)
+        val DEFAULT_TASK_TIMEOUT: Duration = Duration.of(5L, ChronoUnit.SECONDS)
         const val MINIMUM_MAJOR_VERSION = 5
         const val TIMEOUT_PROPERTY_NAME = "timeout"
     }

@@ -1,25 +1,20 @@
 package io.labs.dotanuki.timeouts_enforcer
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.time.Duration
-import kotlin.concurrent.thread
 
-internal class BuildTimeoutTracker(duration: Duration) {
+internal class BuildTimeoutTracker(private val duration: Duration) {
 
     private var hasTimedOut: Boolean = false
-
-    private val watcher by lazy {
-        thread(name = "global-timeout", start = false, isDaemon = false) {
-            Thread.sleep(duration.toMillis())
-            hasTimedOut = true
-        }
-    }
 
     fun shouldAbort(): Boolean = hasTimedOut
 
     fun start() {
-        watcher.run {
-            start()
-            join()
+        GlobalScope.launch {
+            delay(duration.toMillis())
+            hasTimedOut = true
         }
     }
 }
