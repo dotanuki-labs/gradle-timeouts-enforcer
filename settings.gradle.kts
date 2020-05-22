@@ -1,4 +1,4 @@
 rootProject.name = "gradle-timeouts-enforcer"
 
-include(":library")
+include(":timeouts-enforcer-plugin")
 include(":sample")
