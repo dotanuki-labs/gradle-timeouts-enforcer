@@ -51,8 +51,8 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
     }
 
     companion object {
-        val DEFAULT_BUILD_TIMEOUT: Duration = Duration.of(4L, ChronoUnit.SECONDS)
-        val DEFAULT_TASK_TIMEOUT: Duration = Duration.of(5L, ChronoUnit.SECONDS)
+        val DEFAULT_BUILD_TIMEOUT: Duration = Duration.of(4L, ChronoUnit.MINUTES)
+        val DEFAULT_TASK_TIMEOUT: Duration = Duration.of(30L, ChronoUnit.MINUTES)
         const val MINIMUM_MAJOR_VERSION = 5
         const val TIMEOUT_PROPERTY_NAME = "timeout"
     }
