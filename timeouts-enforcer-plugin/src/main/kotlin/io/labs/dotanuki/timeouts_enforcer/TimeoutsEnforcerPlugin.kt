@@ -1,34 +1,40 @@
 package io.labs.dotanuki.timeouts_enforcer
 
-import io.labs.dotanuki.timeouts_enforcer.TimeoutEnforcerException.BuildTimeoutReached
-import io.labs.dotanuki.timeouts_enforcer.TimeoutEnforcerException.InvalidGradleVersion
-import io.labs.dotanuki.timeouts_enforcer.TimeoutEnforcerException.UnsupportedGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.domain.BuildTimeoutTracker
+import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.BuildTimeoutReached
+import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.InvalidGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.UnsupportedGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutsDefinition
+import io.labs.dotanuki.timeouts_enforcer.util.formatMessage
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.logging.LogLevel.INFO
 import java.time.Duration
-import java.time.temporal.ChronoUnit
 
+@Suppress("UnstableApiUsage")
 internal class TimeoutsEnforcerPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
 
-        val buildTimeoutTracker = BuildTimeoutTracker(DEFAULT_BUILD_TIMEOUT).apply { start() }
+        val timeouts = TimeoutsDefinition()
+        val buildTimeoutTracker = BuildTimeoutTracker(timeouts.perBuild)
 
         fun checkBuildTimeout() {
-            if (buildTimeoutTracker.shouldAbort()) {
-                throw BuildTimeoutReached(DEFAULT_BUILD_TIMEOUT)
-            }
+            if (buildTimeoutTracker.shouldAbort()) throw BuildTimeoutReached(timeouts.perBuild)
         }
 
+        buildTimeoutTracker.start()
+
         with(target.gradle) {
+
             ensureValidVersion(gradleVersion)
 
             taskGraph.whenReady { graph ->
+
                 graph.allTasks.forEach { task ->
                     task.run {
-                        evaluateAndSetTimeout(DEFAULT_TASK_TIMEOUT)
+                        evaluateAndSetTimeout(timeouts.perTask)
                         doFirst { checkBuildTimeout() }
                         doLast { checkBuildTimeout() }
                     }
@@ -50,8 +56,6 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
     }
 
     companion object {
-        val DEFAULT_BUILD_TIMEOUT: Duration = Duration.of(8L, ChronoUnit.SECONDS)
-        val DEFAULT_TASK_TIMEOUT: Duration = Duration.of(5L, ChronoUnit.SECONDS)
         const val MINIMUM_MAJOR_VERSION = 5
         const val TIMEOUT_PROPERTY_NAME = "timeout"
     }
