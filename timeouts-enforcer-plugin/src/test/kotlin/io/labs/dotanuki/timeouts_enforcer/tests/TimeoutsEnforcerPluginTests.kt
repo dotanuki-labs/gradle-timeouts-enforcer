@@ -28,18 +28,13 @@ class TimeoutsEnforcerPluginTests {
 
     @Test fun `should break project with unsupported Gradle version`() {
 
-        val unsupportedGradleVersion = "4.10.3"
         val millisToDelay = 100
-
-        val fixtureDir = prepareFixture(
-            perTaskSpec = "5.minutes",
-            perBuildSpec = "2.hours"
-        )
+        val fixtureDir = prepareFixture(perTaskSpec = "5.minutes", perBuildSpec = "2.hours")
 
         val build = GradleRunner.create()
             .withProjectDir(fixtureDir)
             .withPluginClasspath()
-            .withGradleVersion(unsupportedGradleVersion)
+            .withGradleVersion("4.10.3")
             .withArguments("clean", "run", "--args='$millisToDelay'")
             .buildAndFail()
 

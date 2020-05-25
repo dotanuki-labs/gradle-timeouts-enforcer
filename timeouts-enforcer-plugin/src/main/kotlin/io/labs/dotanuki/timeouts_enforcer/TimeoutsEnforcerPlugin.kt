@@ -1,65 +1,34 @@
 package io.labs.dotanuki.timeouts_enforcer
 
 import io.labs.dotanuki.timeouts_enforcer.domain.BuildTimeoutTracker
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.BuildTimeoutReached
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.InvalidGradleVersion
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.UnsupportedGradleVersion
-import io.labs.dotanuki.timeouts_enforcer.util.PluginConfigurationParser
-import io.labs.dotanuki.timeouts_enforcer.util.formatMessage
+import io.labs.dotanuki.timeouts_enforcer.domain.GradleVersionChecker
+import io.labs.dotanuki.timeouts_enforcer.domain.PluginConfigurationParser
+import io.labs.dotanuki.timeouts_enforcer.domain.TaskPatcher
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
-import org.gradle.api.logging.LogLevel.INFO
-import java.time.Duration
 
 @Suppress("UnstableApiUsage")
 internal class TimeoutsEnforcerPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
 
-        val timeouts = PluginConfigurationParser().parseFrom(target.properties)
-        val buildTimeoutTracker = BuildTimeoutTracker(timeouts.perBuild)
+        val acceptedDurations = PluginConfigurationParser().parseFrom(target.properties)
+        val globalTracker = BuildTimeoutTracker(acceptedDurations.perBuild)
 
-        fun checkBuildTimeout() {
-            if (buildTimeoutTracker.shouldAbort()) throw BuildTimeoutReached(timeouts.perBuild)
-        }
-
-        buildTimeoutTracker.start()
+        globalTracker.start()
 
         with(target.gradle) {
-
-            ensureValidVersion(gradleVersion)
+            GradleVersionChecker.requireValidVersion(gradleVersion)
 
             taskGraph.whenReady { graph ->
-
                 graph.allTasks.forEach { task ->
                     task.run {
-                        evaluateAndSetTimeout(timeouts.perTask)
-                        doFirst { checkBuildTimeout() }
-                        doLast { checkBuildTimeout() }
+                        TaskPatcher.patchWithTimeout(task, acceptedDurations.perTask)
+                        doFirst { globalTracker.abortIfNeeded() }
+                        doLast { globalTracker.abortIfNeeded() }
                     }
                 }
             }
         }
-    }
-
-    private fun ensureValidVersion(gradleVersion: String) {
-        gradleVersion.split(".").firstOrNull()
-            ?.let {
-                println("Major gradle version -> $it")
-                if (it.toInt() < MINIMUM_MAJOR_VERSION) throw InvalidGradleVersion(gradleVersion)
-            }
-            ?: throw UnsupportedGradleVersion(gradleVersion)
-    }
-
-    private fun Task.evaluateAndSetTimeout(taskTimeout: Duration) {
-        timeout.orNull
-            ?.let { logger.log(INFO, it.formatMessage("Detected predefined timeout for $name")) }
-            ?: setProperty(TIMEOUT_PROPERTY_NAME, taskTimeout)
-    }
-
-    companion object {
-        const val MINIMUM_MAJOR_VERSION = 5
-        const val TIMEOUT_PROPERTY_NAME = "timeout"
     }
 }

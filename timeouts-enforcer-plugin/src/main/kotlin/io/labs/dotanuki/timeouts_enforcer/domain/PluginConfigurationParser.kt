@@ -1,17 +1,16 @@
-package io.labs.dotanuki.timeouts_enforcer.util
+package io.labs.dotanuki.timeouts_enforcer.domain
 
 import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.InvalidConfiguration
 import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.MissingConfiguration
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutsDefinition
 import java.time.Duration
 import java.time.temporal.ChronoUnit
 
-class PluginConfigurationParser {
+internal class PluginConfigurationParser {
 
-    fun parseFrom(properties: Map<String, Any?>): TimeoutsDefinition {
+    fun parseFrom(properties: Map<String, Any?>): AcceptedDurations {
         val taskSpec = properties[perTask] as? String ?: throw MissingConfiguration(perTask)
         val buildSpec = properties[perBuild] as? String ?: throw MissingConfiguration(perBuild)
-        return TimeoutsDefinition(parseDuration(taskSpec), parseDuration(buildSpec))
+        return AcceptedDurations(parseDuration(taskSpec), parseDuration(buildSpec))
     }
 
     private fun parseDuration(durationSpec: String): Duration = try {
