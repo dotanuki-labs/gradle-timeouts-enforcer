@@ -4,7 +4,7 @@ import io.labs.dotanuki.timeouts_enforcer.domain.BuildTimeoutTracker
 import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.BuildTimeoutReached
 import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.InvalidGradleVersion
 import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.UnsupportedGradleVersion
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutsDefinition
+import io.labs.dotanuki.timeouts_enforcer.util.PluginConfigurationParser
 import io.labs.dotanuki.timeouts_enforcer.util.formatMessage
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -17,7 +17,7 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
 
-        val timeouts = TimeoutsDefinition()
+        val timeouts = PluginConfigurationParser().parseFrom(target.properties)
         val buildTimeoutTracker = BuildTimeoutTracker(timeouts.perBuild)
 
         fun checkBuildTimeout() {
@@ -45,7 +45,10 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
 
     private fun ensureValidVersion(gradleVersion: String) {
         gradleVersion.split(".").firstOrNull()
-            ?.let { if (it.toInt() < MINIMUM_MAJOR_VERSION) throw InvalidGradleVersion(gradleVersion) }
+            ?.let {
+                println("Major gradle version -> $it")
+                if (it.toInt() < MINIMUM_MAJOR_VERSION) throw InvalidGradleVersion(gradleVersion)
+            }
             ?: throw UnsupportedGradleVersion(gradleVersion)
     }
 

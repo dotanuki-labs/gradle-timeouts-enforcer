@@ -6,9 +6,17 @@ import java.time.Duration
 
 internal sealed class TimeoutEnforcerException(error: String) : GradleException(error) {
 
-    object MissingConfiguration : TimeoutEnforcerException("Configuration is mandatory for this plugin")
+    data class MissingConfiguration(
+        val propertyName: String
+    ) : TimeoutEnforcerException(
+        "Missing mandatory property -> $propertyName"
+    )
 
-    object InvalidConfiguration : TimeoutEnforcerException("Missing timeout definition in configuration")
+    data class InvalidConfiguration(
+        val propertyName: String
+    ) : TimeoutEnforcerException(
+        "Cannot parse specification -> $propertyName"
+    )
 
     data class InvalidGradleVersion(
         val version: String
