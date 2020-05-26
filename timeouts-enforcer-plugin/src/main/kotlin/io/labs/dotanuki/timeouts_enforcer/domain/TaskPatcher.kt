@@ -10,7 +10,6 @@ import java.time.Duration
 internal object TaskPatcher {
 
     fun patchWithTimeout(target: Task, maxRunning: Duration) {
-        print("TaskPatcher -> $maxRunning")
         target.run {
             timeout.orNull
                 ?.let { logger.log(INFO, it.formatMessage("Detected predefined timeout for $name")) }
