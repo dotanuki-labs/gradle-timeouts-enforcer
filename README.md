@@ -1,6 +1,6 @@
 # Gradle Timeouts Enforcer Plugin
 
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) ![License](https://img.shields.io/github/license/dotanuki-labs/magic-modules.svg)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) ![Language](https://img.shields.io/github/languages/top/dotanuki-labs/gradle-timeouts-enforcer?color=blue&logo=kotlin) [![Maintainability](https://api.codeclimate.com/v1/badges/13c4a2a26bfc9c631a22/maintainability)](https://codeclimate.com/github/dotanuki-labs/gradle-timeouts-enforcer/maintainability) ![Main](https://github.com/dotanuki-labs/gradle-timeouts-enforcer/workflows/Main/badge.svg) ![License](https://img.shields.io/github/license/dotanuki-labs/gradle-timeouts-enforcer.svg)
 > Ensure that your Gradle build never runs forever, for whatever reason
 
 ## What is this?
