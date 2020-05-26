@@ -23,7 +23,7 @@ internal object ProjecPropertiesParser {
             in SPEC_SECONDS -> ChronoUnit.SECONDS
             in SPEC_MINUTES -> ChronoUnit.MINUTES
             in SPEC_HOURS -> ChronoUnit.HOURS
-            else -> throw IllegalArgumentException("Unsupported spec unit -> $durationSpec")
+            else -> error("Unsupported spec unit -> $durationSpec")
         }
 
         Duration.of(amount.toLong(), unit)
@@ -31,9 +31,10 @@ internal object ProjecPropertiesParser {
         throw InvalidConfiguration(durationSpec)
     }
 
+    const val DURATION_PER_TASK = "io.labs.dotanuki.enforcer.maxDurationPerTask"
+    const val DURATION_PER_BUILD = "io.labs.dotanuki.enforcer.maxDurationPerBuild"
+
     private val SPEC_SECONDS = setOf("SECONDS", "SECOND")
     private val SPEC_MINUTES = setOf("MINUTES", "MINUTE")
     private val SPEC_HOURS = setOf("HOURS", "HOUR")
-    private const val DURATION_PER_TASK = "io.labs.dotanuki.enforcer.maxDurationPerTask"
-    private const val DURATION_PER_BUILD = "io.labs.dotanuki.enforcer.maxDurationPerBuild"
 }
