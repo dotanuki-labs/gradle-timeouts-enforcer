@@ -36,5 +36,5 @@ jobs:
           API_SECRET: ${{ secrets.GRADLE_PLUGINS_PORTAL_API_SECRET }}
         run: |
           ./gradlew clean publishPlugins --stacktrace \
-            -Pgradle.publish.key=API_KEY \
-            -Pgradle.publish.secret=API_SECRET
+            -Pgradle.publish.key=$API_KEY \
+            -Pgradle.publish.secret=$API_SECRET
