@@ -4,7 +4,6 @@ on:
   release:
     types:
       - created
-      - updated
 
 jobs:
   build:
@@ -30,8 +29,8 @@ jobs:
       - name: Build project
         run: ./gradlew build --no-daemon --stacktrace
 
-  release:
-    needs : build
+  upload:
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
