@@ -1,23 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven("https://plugins.gradle.org/m2/")
-    }
-
-    dependencies {
-        classpath("io.labs.dotanuki:timeouts-enforcer-plugin:+")
-    }
-}
-
 plugins {
+    `application`
     id("org.jetbrains.kotlin.jvm") version "1.3.71"
-    application
+    id("io.labs.dotanuki.timeoutsenforcer") version "0.0.2"
 }
-
-apply(plugin = "io.labs.dotanuki.timeoutsenforcer")
 
 repositories {
     mavenCentral()
@@ -30,17 +17,6 @@ dependencies {
 tasks {
     withType<KotlinCompile>().configureEach {
         kotlinOptions.jvmTarget = "1.8"
-    }
-
-    register("eureka") {
-
-        doFirst {
-            Thread.sleep(10000)
-        }
-
-        doLast {
-            println("Eureka!")
-        }
     }
 }
 
