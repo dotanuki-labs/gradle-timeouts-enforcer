@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -30,6 +29,11 @@ jobs:
       - name: Build project
         run: ./gradlew build --no-daemon --stacktrace
 
+  release:
+    needs : build
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Publish to Gradle Plugins Portal
         shell: bash
         env:
