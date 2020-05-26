@@ -54,9 +54,23 @@ gradlePlugin {
     plugins {
         create("gradle-timeouts-enforcer") {
             id = "io.labs.dotanuki.timeoutsenforcer"
-            displayName = "Timeouts Enforcer Gradle Plugin"
+            displayName = "Gradle Timeouts Enforcer Plugin"
             description = "Ensure that no tasks in your Gradle build take more time they should"
             implementationClass = "io.labs.dotanuki.timeouts_enforcer.TimeoutsEnforcerPlugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://ubiratansoares.dev"
+    vcsUrl = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
+    description = "Ensure that your Gradle build never runs forever, for whatever reason"
+
+    (plugins) {
+        "gradle-timeouts-enforcer" {
+            displayName = "Gradle Timeouts Enforcer Plugin"
+            tags = listOf("timeout", "timeouts", "kotlin-dsl", "plugin")
+            version = Definitions.libraryVersion
         }
     }
 }
