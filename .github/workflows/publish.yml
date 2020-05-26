@@ -1,6 +1,9 @@
 name: Publish
 
-on: [tag]
+on:
+  release:
+    types:
+      - created
 
 jobs:
   build:
