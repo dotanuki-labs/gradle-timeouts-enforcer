@@ -40,13 +40,13 @@ plugin {
 
 ```
 
-Check releases for the latest plugin version.
+Check [releases](https://github.com/dotanuki-labs/gradle-timeouts-enforcer/releases) for the latest plugin version.
 
 Step 03. Profit
 
 ## Providing timeouts
 
-Each specification for `duration` in Gradle properties this plugin use must follow the `amount.unit` convention, where 
+In the Gradle properties this plugin use, each value specified as `duration` must follow the `amount.unit` convention, where 
 
 (a) supported `units` are :
 
@@ -62,12 +62,12 @@ Examples of valid specifications
 - `10.SECONDS`
 - `30.Minutes`
 
-Examples of invalid speficifications
+Examples of invalid specifications
 
 - `1.5.hour`
 - `30,5.minutes`
 
-This plugin will parse and validate the values from provided Gradle properties and throw an error if they don't match the expected convention.
+This plugin will parse and validate the values from provided and throw an error if they don't match the expected convention.
 
 ## Supported Gradle versions
 
