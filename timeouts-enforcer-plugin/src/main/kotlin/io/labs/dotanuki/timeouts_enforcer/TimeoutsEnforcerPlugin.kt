@@ -2,7 +2,7 @@ package io.labs.dotanuki.timeouts_enforcer
 
 import io.labs.dotanuki.timeouts_enforcer.domain.BuildTimeoutTracker
 import io.labs.dotanuki.timeouts_enforcer.domain.GradleVersionChecker
-import io.labs.dotanuki.timeouts_enforcer.domain.ProjecPropertiesParser
+import io.labs.dotanuki.timeouts_enforcer.domain.ProjectPropertiesParser
 import io.labs.dotanuki.timeouts_enforcer.domain.TaskPatcher
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -11,7 +11,7 @@ internal class TimeoutsEnforcerPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
 
-        val acceptedDurations = ProjecPropertiesParser.extractDurations(target.properties)
+        val acceptedDurations = ProjectPropertiesParser.extractDurations(target.properties)
         val globalTracker = BuildTimeoutTracker(acceptedDurations.perBuild)
 
         globalTracker.start()

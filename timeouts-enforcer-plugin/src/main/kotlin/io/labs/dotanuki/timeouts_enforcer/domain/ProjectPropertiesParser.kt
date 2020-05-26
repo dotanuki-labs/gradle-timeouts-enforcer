@@ -5,7 +5,7 @@ import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.Missin
 import java.time.Duration
 import java.time.temporal.ChronoUnit
 
-internal object ProjecPropertiesParser {
+internal object ProjectPropertiesParser {
 
     fun extractDurations(properties: Map<String, Any?>): AcceptedDurations {
         val taskSpec = safeExtractProperty(properties, DURATION_PER_TASK)
