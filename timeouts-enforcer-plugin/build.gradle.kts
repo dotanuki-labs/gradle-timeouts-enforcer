@@ -62,7 +62,7 @@ gradlePlugin {
 }
 
 pluginBundle {
-    website = "https://ubiratansoares.dev"
+    website = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
     vcsUrl = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
     description = "Ensure that your Gradle build never runs forever, for whatever reason"
 
