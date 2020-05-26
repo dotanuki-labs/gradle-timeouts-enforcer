@@ -39,7 +39,7 @@ class TimeoutsEnforcerPluginTests {
             .buildAndFail()
 
         assertThat(build.output).apply {
-            contains("Invalid Gradle version")
+            contains("Unsupported Gradle version")
             contains("BUILD FAILED")
         }
     }
