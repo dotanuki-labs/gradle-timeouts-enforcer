@@ -6,15 +6,15 @@ pull_request_rules:
   - name: Automatic merges for Dependabot pull requests
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
-      - status-success=build
+      - status-success=checks
     actions:
       merge:
         method: squash
 
-  - name: Automatic merges for DotanukiBot pull requests
+  - name: Automatic merges for dotanukibot pull requests
     conditions:
       - author~=dotanukibot
-      - status-success=build
+      - status-success=checks
     actions:
       merge:
         method: squash
@@ -22,7 +22,7 @@ pull_request_rules:
   - name: Be author's friend
     conditions:
       - author~=ubiratansoares
-      - status-success=build
+      - status-success=checks
     actions:
       merge:
         method: squash
