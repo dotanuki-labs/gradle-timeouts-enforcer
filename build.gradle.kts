@@ -1,15 +1,6 @@
-buildscript {
 
-    repositories {
-        mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
-    }
-
-    dependencies {
-        classpath(Libraries.kotlinGradlePlugin)
-        classpath(Libraries.testLoggerPlugin)
-        classpath(Libraries.ktLintGradlePlugin)
-    }
+plugins {
+    id("org.gradle.java-gradle-plugin")
 }
 
 allprojects {
@@ -18,12 +9,6 @@ allprojects {
         mavenLocal()
     }
 
-    group = Definitions.groupId
-    version = Definitions.libraryVersion
-}
-
-tasks {
-    create<Delete>("clean") {
-        delete(allprojects.map { it.buildDir })
-    }
+    group = "io.labs.dotanuki"
+    version = "0.0.2"
 }

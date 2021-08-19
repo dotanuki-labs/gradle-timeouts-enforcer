@@ -84,7 +84,7 @@ class TimeoutsEnforcerPluginTests {
                 """
                 io.labs.dotanuki.enforcer.maxDurationPerTask=$perTaskSpec
                 io.labs.dotanuki.enforcer.maxDurationPerBuild=$perBuildSpec
-            """.trimIndent()
+                """.trimIndent()
             )
         }
 
