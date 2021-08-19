@@ -1,30 +1,31 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    java
-    with(BuildPlugins) {
-        id(kotlinJVM)
-        id(ktlint)
-        id(testLogger)
-        id(gradlePluginDevelopment)
-        id(mavenPublisher)
-        id(gradlePluginPublisher) version Versions.gradlePublishPlugin
-    }
+    kotlin("jvm") version "1.5.21"
+    id("idea")
+    id("org.gradle.java-gradle-plugin")
+    id("org.gradle.maven-publish")
+    id("com.adarshr.test-logger") version "3.0.0"
+    id("org.jlleitschuh.gradle.ktlint") version "10.1.0"
+    id("com.gradle.plugin-publish") version "0.15.0"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = sourceCompatibility
 }
 
 dependencies {
-    with(Libraries) {
-        implementation(kotlinStdLib)
-        implementation(kotlinCoroutines)
-        testImplementation(junit)
-        testImplementation(assertj)
-        testImplementation(gradleTestKit())
-    }
+    implementation(kotlin("stdlib-jdk8"))
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.assertj:assertj-core:3.11.1")
+    testImplementation(gradleTestKit())
 }
 
 tasks {
     withType<KotlinCompile>().configureEach {
-        kotlinOptions.jvmTarget = Definitions.targetJDK
+        kotlinOptions.jvmTarget = "1.8"
     }
 
     withType<Test>().configureEach {
@@ -70,7 +71,7 @@ pluginBundle {
         "gradle-timeouts-enforcer" {
             displayName = "Gradle Timeouts Enforcer Plugin"
             tags = listOf("timeout", "timeouts", "kotlin-dsl", "plugin")
-            version = Definitions.libraryVersion
+            version = "0.0.2"
         }
     }
 }

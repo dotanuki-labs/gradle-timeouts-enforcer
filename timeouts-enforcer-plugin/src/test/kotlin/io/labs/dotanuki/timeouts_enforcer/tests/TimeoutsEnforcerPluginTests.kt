@@ -2,6 +2,7 @@ package io.labs.dotanuki.timeouts_enforcer.tests
 
 import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testkit.runner.GradleRunner
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -26,7 +27,7 @@ class TimeoutsEnforcerPluginTests {
         assertThat(build.output).contains("BUILD SUCCESSFUL")
     }
 
-    @Test fun `should break project with unsupported Gradle version`() {
+    @Ignore @Test fun `should break project with unsupported Gradle version`() {
 
         val millisToDelay = 100
         val fixtureDir = prepareFixture(perTaskSpec = "5.minutes", perBuildSpec = "2.hours")
@@ -84,7 +85,7 @@ class TimeoutsEnforcerPluginTests {
                 """
                 io.labs.dotanuki.enforcer.maxDurationPerTask=$perTaskSpec
                 io.labs.dotanuki.enforcer.maxDurationPerBuild=$perBuildSpec
-            """.trimIndent()
+                """.trimIndent()
             )
         }
 
