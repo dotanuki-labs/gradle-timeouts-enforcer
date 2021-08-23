@@ -72,7 +72,7 @@ pluginBundle {
         "gradle-timeouts-enforcer" {
             displayName = "Gradle Timeouts Enforcer Plugin"
             tags = listOf("timeout", "timeouts", "kotlin-dsl", "plugin")
-            version = "0.0.2"
+            version = "0.1.0"
         }
     }
 }
