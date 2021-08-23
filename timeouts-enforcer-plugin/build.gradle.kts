@@ -1,3 +1,4 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -74,4 +75,12 @@ pluginBundle {
             version = "0.0.2"
         }
     }
+}
+
+testlogger {
+    theme = MOCHA
+    showStandardStreams = false
+    showFailedStandardStreams = true
+    showExceptions = true
+    showFullStackTraces = true
 }
