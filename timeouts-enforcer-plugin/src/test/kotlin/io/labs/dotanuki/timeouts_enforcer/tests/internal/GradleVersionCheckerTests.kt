@@ -1,8 +1,8 @@
-package io.labs.dotanuki.timeouts_enforcer.tests.domain
+package io.labs.dotanuki.timeouts_enforcer.tests.internal
 
-import io.labs.dotanuki.timeouts_enforcer.domain.GradleVersionChecker
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.InvalidGradleVersion
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.UnsupportedGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.internal.GradleVersionChecker
+import io.labs.dotanuki.timeouts_enforcer.internal.TimeoutEnforcerException.InvalidGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.internal.TimeoutEnforcerException.UnsupportedGradleVersion
 import org.assertj.core.api.Assertions.assertThatCode
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Test

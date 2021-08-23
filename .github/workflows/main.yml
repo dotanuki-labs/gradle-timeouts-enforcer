@@ -29,8 +29,5 @@ jobs:
           distribution: 'adopt'
           java-version: 11
 
-      - name: Code Analysis
-        run: ./gradlew ktlintCheck --no-daemon
-
-      - name: Run tests
-        run: ./gradlew test --no-daemon
+      - name: Run checks
+        run: ./gradlew clean check --no-daemon

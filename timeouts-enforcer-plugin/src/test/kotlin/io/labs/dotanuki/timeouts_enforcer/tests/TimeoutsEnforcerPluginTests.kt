@@ -2,7 +2,6 @@ package io.labs.dotanuki.timeouts_enforcer.tests
 
 import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -14,7 +13,7 @@ class TimeoutsEnforcerPluginTests {
 
     @Test fun `should not timeout if not needed`() {
 
-        val fixtureDir = prepareFixture(perTaskSpec = "5.minutes", perBuildSpec = "2.hours")
+        val fixtureDir = prepareFixture(perTaskSpec = "5.minutes")
         val millisToDelay = 100
 
         val build = GradleRunner.create()
@@ -27,10 +26,10 @@ class TimeoutsEnforcerPluginTests {
         assertThat(build.output).contains("BUILD SUCCESSFUL")
     }
 
-    @Ignore @Test fun `should break project with unsupported Gradle version`() {
+    @Test fun `should break project with unsupported Gradle version`() {
 
         val millisToDelay = 100
-        val fixtureDir = prepareFixture(perTaskSpec = "5.minutes", perBuildSpec = "2.hours")
+        val fixtureDir = prepareFixture(perTaskSpec = "5.minutes")
 
         val build = GradleRunner.create()
             .withProjectDir(fixtureDir)
@@ -46,7 +45,7 @@ class TimeoutsEnforcerPluginTests {
     }
 
     @Test fun `should timeout with slow task`() {
-        val fixtureDir = prepareFixture(perTaskSpec = "5.seconds", perBuildSpec = "2.hours")
+        val fixtureDir = prepareFixture(perTaskSpec = "5.seconds")
         val millisToDelay = 10000
 
         val build = GradleRunner.create()
@@ -62,29 +61,12 @@ class TimeoutsEnforcerPluginTests {
         }
     }
 
-    @Test fun `should timeout with slow build`() {
-        val fixtureDir = prepareFixture(perTaskSpec = "5.minutes", perBuildSpec = "5.seconds")
-        val millisToDelay = 8000
-
-        val build = GradleRunner.create()
-            .withProjectDir(fixtureDir)
-            .withPluginClasspath()
-            .withArguments("clean", "run", "--args='$millisToDelay'")
-            .buildAndFail()
-
-        assertThat(build.output).apply {
-            contains("Your build timed out")
-            contains("BUILD FAILED")
-        }
-    }
-
-    private fun prepareFixture(perTaskSpec: String, perBuildSpec: String): File =
+    private fun prepareFixture(perTaskSpec: String): File =
         tempFolder.newFolder().apply {
             File("$TEST_FIXTURES/demo").copyRecursively(this)
             File("$this/gradle.properties").writeText(
                 """
-                io.labs.dotanuki.enforcer.maxDurationPerTask=$perTaskSpec
-                io.labs.dotanuki.enforcer.maxDurationPerBuild=$perBuildSpec
+                io.dotanuki.gradle.timeouts.tasks=$perTaskSpec
                 """.trimIndent()
             )
         }
