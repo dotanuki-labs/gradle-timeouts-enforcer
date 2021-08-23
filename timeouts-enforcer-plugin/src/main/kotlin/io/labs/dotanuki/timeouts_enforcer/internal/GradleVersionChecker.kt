@@ -1,7 +1,7 @@
-package io.labs.dotanuki.timeouts_enforcer.domain
+package io.labs.dotanuki.timeouts_enforcer.internal
 
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.InvalidGradleVersion
-import io.labs.dotanuki.timeouts_enforcer.domain.TimeoutEnforcerException.UnsupportedGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.internal.TimeoutEnforcerException.InvalidGradleVersion
+import io.labs.dotanuki.timeouts_enforcer.internal.TimeoutEnforcerException.UnsupportedGradleVersion
 
 internal object GradleVersionChecker {
 
