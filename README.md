@@ -1,22 +1,27 @@
 # Gradle Timeouts Enforcer Plugin
 
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) ![Language](https://img.shields.io/github/languages/top/dotanuki-labs/gradle-timeouts-enforcer?color=blue&logo=kotlin) [![Maintainability](https://api.codeclimate.com/v1/badges/13c4a2a26bfc9c631a22/maintainability)](https://codeclimate.com/github/dotanuki-labs/gradle-timeouts-enforcer/maintainability) ![Main](https://github.com/dotanuki-labs/gradle-timeouts-enforcer/workflows/Main/badge.svg) [![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v?metadataUrl=https://plugins.gradle.org/m2/io/labs/dotanuki/timeouts-enforcer-plugin/maven-metadata.xml&label=Gradle%20Plugin%20Portal)](https://plugins.gradle.org/plugin/io.labs.dotanuki.timeoutsenforcer) ![License](https://img.shields.io/github/license/dotanuki-labs/gradle-timeouts-enforcer.svg)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) 
+[![Maintainability](https://api.codeclimate.com/v1/badges/13c4a2a26bfc9c631a22/maintainability)](https://codeclimate.com/github/dotanuki-labs/gradle-timeouts-enforcer/maintainability) 
+![Main](https://github.com/dotanuki-labs/gradle-timeouts-enforcer/workflows/Main/badge.svg) 
+[![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v?metadataUrl=https://plugins.gradle.org/m2/io/labs/dotanuki/timeouts-enforcer-plugin/maven-metadata.xml&label=Gradle%20Plugin%20Portal)](https://plugins.gradle.org/plugin/io.labs.dotanuki.timeoutsenforcer) 
+![License](https://img.shields.io/github/license/dotanuki-labs/gradle-timeouts-enforcer.svg)
 > Ensure that your Gradle build never runs forever, for whatever reason
 
-## What is this?
+## What
 
-> *Blog post to come, stay tunned*
+> Blog post to come, stay tunned
 
-A simple Gradle plugin that enforces timeouts for build executions, both at task execution level and global build level.
+A simple Gradle plugin that enforces timeouts for all the tasks defined on your Gradle build.
 
-## How
+## Using
 
-**Step 01** : Add these two properties at your `<root-project>/gradle.properties` file
+**Step 01** : Add this property at your `<root-project>/gradle.properties` file
 
 ```
-io.labs.dotanuki.enforcer.maxDurationPerTask=10.minutes
-io.labs.dotanuki.enforcer.maxDurationPerBuild=2.hours
+io.dotanuki.gradle.timeouts.tasks=10.minutes
 ```
+
+For this property you probably want to assign a value based on your slowest build task(s).
 
 **Step 02** : Apply this plugin into your build at your root level Gradle build.
 
@@ -42,15 +47,15 @@ plugin {
 
 Check [releases](https://github.com/dotanuki-labs/gradle-timeouts-enforcer/releases) for the latest plugin version. More instructions also available in the [plugin page](https://plugins.gradle.org/plugin/io.labs.dotanuki.timeoutsenforcer)
 
-## Providing timeouts
+## Providing Timeouts
 
-In the Gradle properties this plugin use, each value specified as `duration` must follow the `amount.unit` convention, where 
+For the Gradle property this plugin reads, the specified value must follow the `amount.unit` convention, where 
 
 (a) supported `unit` include :
 
-- **second**, **seconds** (upper/lower/camel/etc cases)
-- **minute**, **minutes** (upper/lower/camel/etc cases)
-- **hour**, **hours** (upper/lower/camel/etc cases)
+- **second**, **seconds** (upper / lower / camel cases)
+- **minute**, **minutes** (upper / lower / camel cases)
+- **hour**, **hours** (upper / lower / camel cases)
 
 (b) `amount` should be an **integer** value
 
@@ -65,11 +70,11 @@ Examples of invalid specifications
 - `1.5.hour`
 - `30,5.minutes`
 
-This plugin will parse and validate the values from provided and throw an error if they don't match the expected convention.
+This plugin will parse and validate the provided specification and throw an error if it does not match expected conventions.
 
 ## Supported Gradle versions
 
-This plugin supports only Gradle 5.x.y or newer since it is driven by `Task.timeout` [internal property](https://docs.gradle.org/current/javadoc/org/gradle/api/Task.html#getTimeout--).
+This plugin supports only Gradle 5.x.y or newer.
 
 ## See it in action
 
