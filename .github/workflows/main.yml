@@ -30,4 +30,4 @@ jobs:
           java-version: 11
 
       - name: Run checks
-        run: ./gradlew clean check --no-daemon --no-build-cache
+        run: ./gradlew clean check --no-daemon
