@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        java: [ '8', '11']
+        java: ['8', '11']
 
     steps:
       - name: Project Checkout
