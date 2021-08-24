@@ -11,6 +11,16 @@ plugins {
     id("com.gradle.plugin-publish") version "0.15.0"
 }
 
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+val releaseVersion: String = properties["tag"]?.toString()?.ifEmpty { "SNAPSHOT" } ?: "SNAPSHOT"
+
+group = "io.labs.dotanuki"
+version = releaseVersion
+
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = sourceCompatibility
@@ -66,13 +76,13 @@ gradlePlugin {
 pluginBundle {
     website = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
     vcsUrl = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
-    description = "Ensure that your Gradle build never runs forever, for whatever reason"
+    description = "Ensures that your Gradle build never runs forever, for whatever reason"
 
     (plugins) {
         "gradle-timeouts-enforcer" {
             displayName = "Gradle Timeouts Enforcer Plugin"
             tags = listOf("timeout", "timeouts", "kotlin-dsl", "plugin")
-            version = "0.1.0"
+            version = releaseVersion
         }
     }
 }
