@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.labs.dotanuki:timeouts-enforcer-plugin:+'
+        classpath 'io.labs.dotanuki:timeouts-enforcer-plugin:SNAPSHOT'
     }
 }
 
