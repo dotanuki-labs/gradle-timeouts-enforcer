@@ -20,13 +20,10 @@ jobs:
           java-version: 11
           cache: 'gradle'
 
-      - name: Build project
-        run: ./gradlew build --no-daemon --stacktrace
-
       - name: Publish to Gradle Plugins Portal
         shell: bash
         env:
           API_KEY: ${{ secrets.GRADLE_PLUGINS_PORTAL_API_KEY }}
           API_SECRET: ${{ secrets.GRADLE_PLUGINS_PORTAL_API_SECRET }}
-        run: |
-          ./gradlew publishPlugins --stacktrace -Pgradle.publish.key=$API_KEY -Pgradle.publish.secret=$API_SECRET
+          TAG: ${{ github.event.release.tag_name }}
+        run: ./publish.sh portal
