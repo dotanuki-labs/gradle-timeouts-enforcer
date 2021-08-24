@@ -9,6 +9,10 @@ on:
 jobs:
   checks:
     runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: true
+      matrix:
+        java: ['8', '11']
 
     steps:
       - name: Project Checkout
@@ -18,7 +22,7 @@ jobs:
         uses: actions/setup-java@v2.3.0
         with:
           distribution: 'adopt'
-          java-version: 11
+          java-version: ${{ matrix.java }}
           cache: 'gradle'
 
       - name: Run checks
