@@ -1,15 +1,26 @@
 package io.labs.dotanuki.timeouts_enforcer.tests
 
+import com.google.testing.junit.testparameterinjector.TestParameter
+import com.google.testing.junit.testparameterinjector.TestParameterInjector
 import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testkit.runner.GradleRunner
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import org.junit.runner.RunWith
 import java.io.File
 
+@RunWith(TestParameterInjector::class)
 class TimeoutsEnforcerPluginTests {
 
     @get:Rule val tempFolder = TemporaryFolder()
+
+    @Suppress("unused")
+    enum class GradleTestVersion(val value: String) {
+        FIVE("5.5"),
+        SIX("6.8"),
+        SEVEN("7.1"),
+    }
 
     @Test fun `should not timeout if not needed`() {
 
@@ -44,14 +55,14 @@ class TimeoutsEnforcerPluginTests {
         }
     }
 
-    @Test fun `should timeout with slow task`() {
+    @Test fun `should timeout with slow task`(@TestParameter version: GradleTestVersion) {
         val fixtureDir = prepareFixture(perTaskSpec = "5.seconds")
         val millisToDelay = 10000
 
         val build = GradleRunner.create()
             .withProjectDir(fixtureDir)
             .withPluginClasspath()
-            .withGradleVersion("6.3")
+            .withGradleVersion(version.value)
             .withArguments("clean", "run", "--args='$millisToDelay'")
             .buildAndFail()
 
