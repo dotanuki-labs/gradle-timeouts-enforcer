@@ -6,7 +6,7 @@ plugins {
     id("idea")
     id("org.gradle.java-gradle-plugin")
     id("org.gradle.maven-publish")
-    id("com.adarshr.test-logger") version "3.0.0"
+    id("com.adarshr.test-logger") version "3.1.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
     id("com.gradle.plugin-publish") version "0.16.0"
 }
