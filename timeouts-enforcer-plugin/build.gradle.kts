@@ -30,7 +30,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.assertj:assertj-core:3.22.0")
-    testImplementation("com.google.testparameterinjector:test-parameter-injector:1.7")
+    testImplementation("com.google.testparameterinjector:test-parameter-injector:1.8")
     testImplementation(gradleTestKit())
 }
 
