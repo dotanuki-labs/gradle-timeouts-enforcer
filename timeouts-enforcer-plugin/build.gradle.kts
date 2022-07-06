@@ -8,7 +8,7 @@ plugins {
     id("org.gradle.maven-publish")
     id("com.adarshr.test-logger") version "3.2.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
-    id("com.gradle.plugin-publish") version "0.21.0"
+    id("com.gradle.plugin-publish") version "1.0.0"
 }
 
 repositories {
@@ -77,14 +77,7 @@ pluginBundle {
     website = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
     vcsUrl = "https://github.com/dotanuki-labs/gradle-timeouts-enforcer"
     description = "Ensures that your Gradle build never runs forever, for whatever reason"
-
-    (plugins) {
-        "gradle-timeouts-enforcer" {
-            displayName = "Gradle Timeouts Enforcer Plugin"
-            tags = listOf("timeout", "timeouts", "kotlin-dsl", "plugin")
-            version = releaseVersion
-        }
-    }
+    tags = listOf("timeout", "timeouts", "kotlin-dsl", "plugin")
 }
 
 testlogger {
