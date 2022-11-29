@@ -2,7 +2,7 @@ import com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.21"
+    kotlin("jvm") version "1.7.22"
     id("idea")
     id("org.gradle.java-gradle-plugin")
     id("org.gradle.maven-publish")
