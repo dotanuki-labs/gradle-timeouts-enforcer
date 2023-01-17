@@ -29,7 +29,7 @@ java {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testImplementation("junit:junit:4.13.2")
-    testImplementation("org.assertj:assertj-core:3.24.1")
+    testImplementation("org.assertj:assertj-core:3.24.2")
     testImplementation("com.google.testparameterinjector:test-parameter-injector:1.10")
     testImplementation(gradleTestKit())
 }
