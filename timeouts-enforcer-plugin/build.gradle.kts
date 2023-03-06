@@ -7,7 +7,7 @@ plugins {
     id("org.gradle.java-gradle-plugin")
     id("org.gradle.maven-publish")
     id("com.adarshr.test-logger") version "3.2.0"
-    id("org.jlleitschuh.gradle.ktlint") version "11.1.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
     id("com.gradle.plugin-publish") version "0.21.0"
 }
 
