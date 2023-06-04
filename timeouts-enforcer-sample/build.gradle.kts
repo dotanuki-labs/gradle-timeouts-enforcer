@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
 }
 
 tasks {
