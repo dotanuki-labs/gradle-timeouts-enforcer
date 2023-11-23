@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `application`
-    id("org.jetbrains.kotlin.jvm") version "1.9.20"
+    id("org.jetbrains.kotlin.jvm") version "1.9.21"
     id("io.labs.dotanuki.timeoutsenforcer") version "0.1.0"
 }
 
