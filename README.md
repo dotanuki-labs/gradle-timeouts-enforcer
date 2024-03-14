@@ -1,15 +1,10 @@
 # Gradle Timeouts Enforcer Plugin
 
-[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io/) 
-[![Maintainability](https://api.codeclimate.com/v1/badges/13c4a2a26bfc9c631a22/maintainability)](https://codeclimate.com/github/dotanuki-labs/gradle-timeouts-enforcer/maintainability) 
-![Main](https://github.com/dotanuki-labs/gradle-timeouts-enforcer/workflows/Main/badge.svg) 
-[![Gradle Plugin Portal](https://img.shields.io/maven-metadata/v?metadataUrl=https://plugins.gradle.org/m2/io/labs/dotanuki/timeouts-enforcer-plugin/maven-metadata.xml&label=Gradle%20Plugin%20Portal)](https://plugins.gradle.org/plugin/io.labs.dotanuki.timeoutsenforcer) 
-![License](https://img.shields.io/github/license/dotanuki-labs/gradle-timeouts-enforcer.svg)
-> Ensure that your Gradle build never runs forever, for whatever reason
+> [!WARNING] 
+> This project is no longer maintened. Please fork it at will
+
 
 ## What
-
-> Blog post to come, stay tunned
 
 A simple Gradle plugin that enforces timeouts for all the tasks defined on your Gradle build.
 
